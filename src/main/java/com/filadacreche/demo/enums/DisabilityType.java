@@ -1,0 +1,13 @@
+package com.filadacreche.demo.enums;
+
+public enum DisabilityType {
+    BLINDNESS,
+    LOW_VISION,
+    HEARING_IMPAIRMENT,
+    INTELLECTUAL_DISABILITY,
+    LOCOMOTOR_DISABILITY,
+    PERVASIVE_DEVELOPMENTAL_DISORDER,
+    MULTIPLE,
+    NOT_DECLARED,
+    OTHER;
+}
