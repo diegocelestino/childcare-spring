@@ -4,18 +4,17 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.Value;
 
+import java.time.LocalDate;
+import java.util.UUID;
+
 @Value
 @Getter
 @Setter
 public class ChildCreateDto {
 
     String name;
-    String birthDate;
-    String gender;
-    String birthCity;
-    String birthState;
-    String nacionality;
-    String race;
-    String cycle;
-    String period;
+    LocalDate birthDate;
+    String registrationNumber;
+    LocalDate registrationDate;
+    UUID subgroupId;
 }

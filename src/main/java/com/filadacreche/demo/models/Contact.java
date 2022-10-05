@@ -34,7 +34,7 @@ public class Contact {
     private String value;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "child_id")
     private Child child;
 
 

@@ -14,10 +14,4 @@ public class ResourceNotFoundException extends RuntimeException {
         this.resourceName = resourceName;
         this.resourceId = resourceId.toString();
     }
-
-    public ResourceNotFoundException(ResourceName resourceName, String resourceValue) {
-        super();
-        this.resourceName = resourceName;
-        this.resourceId = resourceValue;
-    }
 }

@@ -33,6 +33,7 @@ public class Child{
     @Column(nullable = false)
     private LocalDate registrationDate;
 
+    @Enumerated(EnumType.STRING)
     private MovimentMap movimentMap;
 
     private String foodRestriction;
@@ -42,6 +43,10 @@ public class Child{
     private Boolean uniformDelivered;
 
     private Boolean census;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "subgroup_id")
+    private Subgroup subgroup;
 
     @OneToMany(mappedBy = "child")
     private List<Observation> observations;
@@ -57,4 +62,19 @@ public class Child{
     )
     private List<Guardian> guardians;
 
+
+    public Child(String name, LocalDate birthDate, String registrationNumber, LocalDate registrationDate, Subgroup subgroup) {
+        this.id = UUID.randomUUID();
+        this.name = name;
+        this.birthDate = birthDate;
+        this.registrationNumber = registrationNumber.replaceAll("[^0-9]" , "");
+        this.registrationDate = registrationDate;
+        this.subgroup = subgroup;
+        this.movimentMap = MovimentMap.NONE;
+        this.foodRestriction = "";
+        this.uniformDispatch = "";
+        this.uniformDelivered = false;
+        this.census = false;
+
+    }
 }

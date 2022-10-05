@@ -1,23 +1,17 @@
 package com.filadacreche.demo.services;
 
 import com.filadacreche.demo.dtos.ChildCreateDto;
-import com.filadacreche.demo.enums.Cycle;
-import com.filadacreche.demo.enums.Gender;
-import com.filadacreche.demo.enums.Period;
-import com.filadacreche.demo.enums.Race;
 import com.filadacreche.demo.exceptions.ResourceName;
 import com.filadacreche.demo.exceptions.ResourceNotFoundException;
-import com.filadacreche.demo.models.BirthPlace;
 import com.filadacreche.demo.models.Child;
 import com.filadacreche.demo.models.Guardian;
 import com.filadacreche.demo.repositories.ChildRepository;
 import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,22 +20,17 @@ import java.util.UUID;
 @Log4j2
 public class ChildService {
     private final ChildRepository childRepository;
+    private final SubgroupService subgroupService;
 
-    public Child save(ChildCreateDto childDto){
+    public Child save(ChildCreateDto childCreateDto){
         Child child = new Child(
-                childDto.getName(),
-                LocalDate.parse(childDto.getBirthDate()),
-                Gender.valueOf(childDto.getGender()),
-                new BirthPlace(
-                        childDto.getBirthCity(),
-                        childDto.getBirthState(),
-                        childDto.getNacionality()),
-                Race.valueOf(childDto.getRace()),
-                Cycle.valueOf(childDto.getCycle()),
-                Period.valueOf(childDto.getPeriod())
+                childCreateDto.getName(),
+                childCreateDto.getBirthDate(),
+                childCreateDto.getRegistrationNumber(),
+                childCreateDto.getRegistrationDate(),
+                subgroupService.getSubgroup(childCreateDto.getSubgroupId())
         );
-
-        return this.childRepository.save(child);
+        return childRepository.save(child);
     }
 
     public void appendGuardian(Guardian guardian, UUID childId){
@@ -56,5 +45,9 @@ public class ChildService {
     public Child getChild(UUID childId) {
         return childRepository.findById(childId)
                 .orElseThrow(() -> new ResourceNotFoundException(ResourceName.CHILD, childId));
+    }
+
+    public Page<Child> getAccounts(Pageable pageable) {
+        return childRepository.findAll(pageable);
     }
 }

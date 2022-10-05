@@ -1,11 +1,11 @@
 package com.filadacreche.demo.dtos;
 
+import lombok.Getter;
 import lombok.Value;
 
 @Value
-public class GuardianDto {
-    String id;
+@Getter
+public class TeacherCreateDto {
     String name;
-    String cpf;
-    String workPeriod;
+    String subgroupId;
 }

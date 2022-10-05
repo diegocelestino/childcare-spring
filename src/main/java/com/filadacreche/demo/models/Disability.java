@@ -6,21 +6,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name = "disabilities")
+@DiscriminatorValue(value = "disability")
 public class Disability extends Observation {
-    @Id
-    @Column(name = "disability_id")
-    private UUID id;
 
-    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private DisabilityType type;
-
-    private String description;
 
 }

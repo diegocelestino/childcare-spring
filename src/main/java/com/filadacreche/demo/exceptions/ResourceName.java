@@ -6,7 +6,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum ResourceName {
-    CHILD("Child");
+    CHILD("Child"),
+    SUBGROUP("Subgroup");
 
     private String name;
 }

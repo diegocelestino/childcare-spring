@@ -3,9 +3,9 @@ package com.filadacreche.demo.dtos;
 import lombok.Value;
 
 @Value
-public class GuardianDto {
+public class RoomDto {
     String id;
+    Integer number;
     String name;
-    String cpf;
-    String workPeriod;
+    String sedName;
 }
