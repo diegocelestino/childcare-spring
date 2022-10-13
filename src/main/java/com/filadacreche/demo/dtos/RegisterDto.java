@@ -5,7 +5,7 @@ import lombok.Value;
 import java.util.UUID;
 
 @Value
-public class TeacherDto {
-    UUID id;
-    String name;
+public class RegisterDto {
+    UUID childId;
+    UUID subgroupId;
 }

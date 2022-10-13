@@ -62,14 +62,12 @@ public class Child{
     )
     private List<Guardian> guardians;
 
-
-    public Child(String name, LocalDate birthDate, String registrationNumber, LocalDate registrationDate, Subgroup subgroup) {
+    public Child(String name, LocalDate birthDate, String registrationNumber, LocalDate registrationDate) {
         this.id = UUID.randomUUID();
         this.name = name;
         this.birthDate = birthDate;
         this.registrationNumber = registrationNumber.replaceAll("[^0-9]" , "");
         this.registrationDate = registrationDate;
-        this.subgroup = subgroup;
         this.movimentMap = MovimentMap.NONE;
         this.foodRestriction = "";
         this.uniformDispatch = "";

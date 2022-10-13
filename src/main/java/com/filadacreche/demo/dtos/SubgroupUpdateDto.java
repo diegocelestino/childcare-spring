@@ -7,9 +7,9 @@ import java.util.UUID;
 
 @Value
 @Getter
-public class SubgroupCreateDto {
+public class SubgroupUpdateDto {
+    UUID id;
     String cycle;
     String period;
     Integer capacity;
-    UUID roomId;
 }

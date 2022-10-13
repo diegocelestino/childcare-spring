@@ -1,6 +1,9 @@
 package com.filadacreche.demo.services;
 
 import com.filadacreche.demo.dtos.ChildCreateDto;
+import com.filadacreche.demo.dtos.ChildDto;
+import com.filadacreche.demo.dtos.RegisterDto;
+import com.filadacreche.demo.enums.MovimentMap;
 import com.filadacreche.demo.exceptions.ResourceName;
 import com.filadacreche.demo.exceptions.ResourceNotFoundException;
 import com.filadacreche.demo.models.Child;
@@ -12,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,19 +31,50 @@ public class ChildService {
                 childCreateDto.getName(),
                 childCreateDto.getBirthDate(),
                 childCreateDto.getRegistrationNumber(),
-                childCreateDto.getRegistrationDate(),
-                subgroupService.getSubgroup(childCreateDto.getSubgroupId())
+                childCreateDto.getRegistrationDate()
         );
+
+        child.setSubgroup(subgroupService.getSubgroup(childCreateDto.getSubgroupId()));
+
         return childRepository.save(child);
     }
 
     public void appendGuardian(Guardian guardian, UUID childId){
         Child child = getChild(childId);
-        log.warn(child.getName());
         List<Guardian> guardians = child.getGuardians();
         guardians.add(guardian);
         child.setGuardians(guardians);
         childRepository.save(child);
+    }
+
+    public Child register(RegisterDto registerDto) {
+        Child child = getChild(registerDto.getChildId());
+        child.setSubgroup(subgroupService.getSubgroup(registerDto.getSubgroupId()));
+        return childRepository.save(child);
+    }
+
+    public Child unregister(RegisterDto registerDto) {
+        Child child = getChild(registerDto.getChildId());
+        child.setSubgroup(null);
+        return childRepository.save(child);
+    }
+
+    public void delete(UUID childId) {
+        childRepository.delete(getChild(childId));
+    }
+
+    public Child update(ChildDto childDtoIn) {
+        Child child = getChild(childDtoIn.getId());
+        child.setName(childDtoIn.getName());
+        child.setBirthDate(LocalDate.parse(childDtoIn.getBirthDate()));
+        child.setRegistrationNumber(childDtoIn.getRegistrationNumber());
+        child.setRegistrationDate(childDtoIn.getRegistrationDate());
+        child.setMovimentMap(MovimentMap.valueOf(childDtoIn.getMovimentMap()));
+        child.setFoodRestriction(childDtoIn.getFoodRestriction());
+        child.setUniformDispatch(childDtoIn.getUniformDispatch());
+        child.setUniformDelivered(childDtoIn.getUniformDelivered());
+        child.setCensus(childDtoIn.getCensus());
+        return childRepository.save(child);
     }
 
     public Child getChild(UUID childId) {
@@ -47,7 +82,9 @@ public class ChildService {
                 .orElseThrow(() -> new ResourceNotFoundException(ResourceName.CHILD, childId));
     }
 
-    public Page<Child> getAccounts(Pageable pageable) {
+    public Page<Child> getChildren(Pageable pageable) {
         return childRepository.findAll(pageable);
     }
+
+
 }

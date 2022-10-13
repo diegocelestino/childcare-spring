@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -27,6 +28,13 @@ public class SubgroupController {
         return ResponseEntity.ok(subgroupDto);
     }
 
+//    @GetMapping("{roomId}")
+//    public ResponseEntity<List<SubgroupDto>> showByRoom(@PathVariable UUID roomId){
+//        List<Subgroup> subgroups = subgroupService.getSubgroupsByRoom(roomId);
+//        List<SubgroupDto> subgroupDtos = subgroupMapper.to(subgroups);
+//        return ResponseEntity.ok(subgroupDtos);
+//    }
+
     @PostMapping
     public ResponseEntity<SubgroupDto> create(@RequestBody SubgroupCreateDto subgroupCreateDto){
         Subgroup subgroup = subgroupService.save(subgroupCreateDto);
@@ -34,6 +42,16 @@ public class SubgroupController {
         return ResponseEntity.ok(subgroupDto);
     }
 
+    @PutMapping
+    public ResponseEntity<SubgroupDto> update(@RequestBody SubgroupUpdateDto subgroupUpdateDto){
+        Subgroup subgroup = subgroupService.update(subgroupUpdateDto);
+        SubgroupDto subgroupDto = subgroupMapper.to(subgroup);
+        return ResponseEntity.ok(subgroupDto);
+    }
 
-
+    @DeleteMapping("{subgroupId}")
+    public ResponseEntity<Void> delete(@PathVariable UUID subgroupId) {
+        subgroupService.delete(subgroupId);
+        return ResponseEntity.noContent().build();
+    }
 }

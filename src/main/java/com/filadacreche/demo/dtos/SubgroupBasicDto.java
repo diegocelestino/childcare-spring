@@ -1,15 +1,13 @@
 package com.filadacreche.demo.dtos;
 
-import lombok.Getter;
 import lombok.Value;
 
-import java.util.UUID;
+import java.util.List;
 
 @Value
-@Getter
-public class SubgroupCreateDto {
+public class SubgroupBasicDto {
+    String id;
     String cycle;
     String period;
     Integer capacity;
-    UUID roomId;
 }

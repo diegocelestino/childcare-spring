@@ -7,7 +7,10 @@ import lombok.Getter;
 @Getter
 public enum ResourceName {
     CHILD("Child"),
-    SUBGROUP("Subgroup");
+    SUBGROUP("Subgroup"),
+    ROOM("Room"),
+    GUARDIAN("Guardian"),
+    TEACHER("TEACHER");
 
     private String name;
 }

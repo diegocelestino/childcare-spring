@@ -33,7 +33,7 @@ public class Subgroup {
     private Integer capacity;
 
     @ManyToOne
-    @JoinColumn(name = "room_id")
+    @JoinColumn(name = "room_id", nullable = false)
     private Room room;
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -47,10 +47,11 @@ public class Subgroup {
     @OneToMany(mappedBy = "subgroup")
     private List<Child> children;
 
-    public Subgroup(Cycle cycle, Period period, Integer capacity) {
+    public Subgroup(Cycle cycle, Period period, Integer capacity, Room room) {
         this.id = UUID.randomUUID();
         this.cycle = cycle;
         this.period = period;
         this.capacity = capacity;
+        this.room = room;
     }
 }

@@ -2,6 +2,9 @@ package com.filadacreche.demo.services;
 
 import com.filadacreche.demo.dtos.RoomCreateDto;
 import com.filadacreche.demo.dtos.TeacherCreateDto;
+import com.filadacreche.demo.dtos.TeacherDto;
+import com.filadacreche.demo.exceptions.ResourceName;
+import com.filadacreche.demo.exceptions.ResourceNotFoundException;
 import com.filadacreche.demo.models.Room;
 import com.filadacreche.demo.models.Teacher;
 import com.filadacreche.demo.repositories.RoomRepository;
@@ -28,4 +31,18 @@ public class TeacherService {
         return teacherRepository.save(teacher);
     }
 
+    public void delete(UUID teacherId) {
+        teacherRepository.delete(getTeacher(teacherId));
+    }
+
+    public Teacher getTeacher(UUID teacherId) {
+        return teacherRepository.findById(teacherId)
+                .orElseThrow(() -> new ResourceNotFoundException(ResourceName.TEACHER, teacherId));
+    }
+
+    public Teacher update(TeacherDto teacherUpdateDto) {
+        Teacher teacher = getTeacher(teacherUpdateDto.getId());
+        teacher.setName(teacherUpdateDto.getName());
+        return teacherRepository.save(teacher);
+    }
 }
