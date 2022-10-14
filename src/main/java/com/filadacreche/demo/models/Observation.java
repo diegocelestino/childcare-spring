@@ -1,5 +1,6 @@
 package com.filadacreche.demo.models;
 
+import com.filadacreche.demo.enums.ObservationType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,9 +10,8 @@ import java.util.UUID;
 
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "kind")
 @Table(name = "observations")
 public class Observation {
     @Id
@@ -22,11 +22,16 @@ public class Observation {
     @JoinColumn(name = "child_id")
     private Child child;
 
+    private ObservationType observationType;
+
     private String description;
 
 
-    public Observation() {
+    public Observation(Child child, ObservationType observationType, String description) {
         this.id = UUID.randomUUID();
+        this.child = child;
+        this.observationType = observationType;
+        this.description = description;
     }
 }
 

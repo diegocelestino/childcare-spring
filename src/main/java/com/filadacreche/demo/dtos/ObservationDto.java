@@ -7,7 +7,7 @@ import java.util.UUID;
 @Value
 public class ObservationDto {
     String id;
-    UUID childId;
+    String observationType;
     String description;
-    String kind;
+    ChildBasicDto child;
 }

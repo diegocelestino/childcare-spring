@@ -9,6 +9,7 @@ import java.util.UUID;
 @Getter
 public class ObservationCreateDto {
     UUID childId;
+    String observationType;
     String description;
-    String kind; 
+
 }
