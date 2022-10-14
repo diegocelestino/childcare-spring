@@ -19,4 +19,5 @@ public class ChildDto {
     String uniformDispatch;
     Boolean uniformDelivered;
     Boolean census;
+    SubgroupBasicDto subgroup;
 }

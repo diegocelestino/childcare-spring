@@ -39,6 +39,10 @@ public class ChildService {
         return childRepository.save(child);
     }
 
+    public List<Child> getChildrenBySubgroup(UUID subgroupId) {
+        return this.childRepository.findAllBySubgroupId(subgroupId);
+    }
+
     public void appendGuardian(Guardian guardian, UUID childId){
         Child child = getChild(childId);
         List<Guardian> guardians = child.getGuardians();
@@ -85,6 +89,7 @@ public class ChildService {
     public Page<Child> getChildren(Pageable pageable) {
         return childRepository.findAll(pageable);
     }
+
 
 
 }

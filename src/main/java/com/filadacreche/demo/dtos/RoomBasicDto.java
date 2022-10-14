@@ -6,10 +6,8 @@ import java.util.List;
 
 
 @Value
-public class RoomDto {
+public class RoomBasicDto {
     String id;
     Integer number;
-    String name;
-    String sedName;
-    List<SubgroupBasicDto> subgroups;
+
 }

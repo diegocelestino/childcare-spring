@@ -12,4 +12,5 @@ public class SubgroupDto {
     Integer capacity;
     List<TeacherDto> teachers;
     List<ChildDto> children;
+    RoomBasicDto room;
 }

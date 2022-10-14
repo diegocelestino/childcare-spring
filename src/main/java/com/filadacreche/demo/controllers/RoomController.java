@@ -30,6 +30,13 @@ public class RoomController {
         return ResponseEntity.ok(roomsDto);
     }
 
+    @GetMapping("{roomId}")
+    public ResponseEntity<RoomDto> show(@PathVariable UUID roomId){
+        Room room = roomService.getRoom(roomId);
+        RoomDto roomDto = roomMapper.to(room);
+        return ResponseEntity.ok(roomDto);
+    }
+
     @PostMapping
     public ResponseEntity<RoomDto> create(@RequestBody RoomCreateDto roomCreateDto){
         Room room = roomService.save(roomCreateDto);

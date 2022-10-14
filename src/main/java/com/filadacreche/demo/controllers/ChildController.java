@@ -13,6 +13,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -24,19 +25,26 @@ public class ChildController {
     private final ChildService childService;
     private final ChildMapper childMapper;
 
-    @GetMapping()
-    public ResponseEntity<Page<ChildDto>> index(
-            @PageableDefault(page = 0, size = 20, sort = "name") Pageable pageable) {
-
-        Page<Child> children = childService.getChildren(pageable);
-        return ResponseEntity.ok(children.map(childMapper::to));
-    }
+//    @GetMapping()
+//    public ResponseEntity<Page<ChildDto>> index(
+//            @PageableDefault(page = 0, size = 20, sort = "name") Pageable pageable) {
+//
+//        Page<Child> children = childService.getChildren(pageable);
+//        return ResponseEntity.ok(children.map(childMapper::to));
+//    }
 
     @GetMapping("{childId}")
     public ResponseEntity<ChildDto> show(@PathVariable UUID childId) {
         Child child = childService.getChild(childId);
         ChildDto childDto = childMapper.to(child);
         return ResponseEntity.ok(childDto);
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<ChildDto>> getChildrenBySubgroup(@RequestParam UUID subgroupId) {
+        List<Child> children = childService.getChildrenBySubgroup(subgroupId);
+        List<ChildDto> childrenDto = childMapper.to(children);
+        return ResponseEntity.ok(childrenDto);
     }
 
     @PostMapping

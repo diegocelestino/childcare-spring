@@ -28,12 +28,12 @@ public class SubgroupController {
         return ResponseEntity.ok(subgroupDto);
     }
 
-//    @GetMapping("{roomId}")
-//    public ResponseEntity<List<SubgroupDto>> showByRoom(@PathVariable UUID roomId){
-//        List<Subgroup> subgroups = subgroupService.getSubgroupsByRoom(roomId);
-//        List<SubgroupDto> subgroupDtos = subgroupMapper.to(subgroups);
-//        return ResponseEntity.ok(subgroupDtos);
-//    }
+    @GetMapping()
+    public ResponseEntity<List<SubgroupDto>> getSubgroupsByRoom(@RequestParam UUID roomId){
+        List<Subgroup> subgroups = subgroupService.getSubgroupsByRoom(roomId);
+        List<SubgroupDto> subgroupDtos = subgroupMapper.to(subgroups);
+        return ResponseEntity.ok(subgroupDtos);
+    }
 
     @PostMapping
     public ResponseEntity<SubgroupDto> create(@RequestBody SubgroupCreateDto subgroupCreateDto){
