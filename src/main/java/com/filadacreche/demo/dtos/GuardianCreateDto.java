@@ -6,10 +6,7 @@ import java.util.UUID;
 
 @Value
 public class GuardianCreateDto {
-
+    UUID childId;
     String name;
     String cpf;
-    String workPeriod;
-    UUID childId;
-
 }

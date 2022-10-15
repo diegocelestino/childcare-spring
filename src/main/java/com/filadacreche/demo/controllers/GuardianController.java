@@ -1,11 +1,9 @@
 package com.filadacreche.demo.controllers;
 
 
-import com.filadacreche.demo.dtos.ChildDto;
 import com.filadacreche.demo.dtos.GuardianCreateDto;
 import com.filadacreche.demo.dtos.GuardianDto;
 import com.filadacreche.demo.mappers.GuardianMapper;
-import com.filadacreche.demo.models.Child;
 import com.filadacreche.demo.models.Guardian;
 import com.filadacreche.demo.services.GuardianService;
 import lombok.AllArgsConstructor;

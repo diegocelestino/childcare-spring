@@ -27,22 +27,18 @@ public class Contact {
     private OwnerType ownerType;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private ContactType contactType;
+    private String cellphone;
 
-    @Column(nullable = false)
-    private String value;
-
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "child_id")
     private Child child;
 
 
-    public Contact(UUID id, String ownerName, OwnerType ownerType, ContactType contactType, String value) {
-        this.id = id;
+    public Contact(String ownerName, OwnerType ownerType, String cellphone, Child child) {
+        this.id = UUID.randomUUID();
         this.ownerName = ownerName;
         this.ownerType = ownerType;
-        this.contactType = contactType;
-        this.value = value;
+        this.cellphone = cellphone;
+        this.child = child;
     }
 }

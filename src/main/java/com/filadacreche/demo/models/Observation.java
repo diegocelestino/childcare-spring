@@ -18,7 +18,7 @@ public class Observation {
     @Column(name = "observation_id")
     private UUID id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "child_id")
     private Child child;
 

@@ -30,7 +30,7 @@ public class Room {
     @Column(nullable = false)
     private String sedName;
 
-    @OneToMany(mappedBy = "room")
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<Subgroup> subgroups;
 
 

@@ -38,4 +38,10 @@ public class ObservationController {
         ObservationDto observationDto = observationMapper.to(observation);
         return ResponseEntity.ok(observationDto);
     }
+
+    @DeleteMapping("{observationId}")
+    public ResponseEntity<Void> delete(@PathVariable UUID observationId) {
+        observationService.delete(observationId);
+        return ResponseEntity.noContent().build();
+    }
 }

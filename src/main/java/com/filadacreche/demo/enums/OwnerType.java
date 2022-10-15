@@ -6,5 +6,4 @@ public enum OwnerType {
     SISTER,
     BROTHER,
     OTHER;
-
 }

@@ -44,7 +44,7 @@ public class Subgroup {
     )
     private List<Teacher> teachers;
 
-    @OneToMany(mappedBy = "subgroup")
+    @OneToMany(mappedBy = "subgroup", cascade = CascadeType.PERSIST)
     private List<Child> children;
 
     public Subgroup(Cycle cycle, Period period, Integer capacity, Room room) {

@@ -30,4 +30,8 @@ public class ObservationService {
     public List<Observation> getObservationsByChildId(UUID childId) {
         return this.observationRepository.findAllByChildId(childId);
     }
+
+    public void delete(UUID observationId) {
+        this.observationRepository.deleteById(observationId);
+    }
 }

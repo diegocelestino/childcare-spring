@@ -10,7 +10,8 @@ public enum ResourceName {
     SUBGROUP("Subgroup"),
     ROOM("Room"),
     GUARDIAN("Guardian"),
-    TEACHER("TEACHER");
+    TEACHER("Teacher"),
+    CONTACT("Contact");
 
     private String name;
 }

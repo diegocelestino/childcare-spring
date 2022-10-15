@@ -9,5 +9,4 @@ public class GuardianDto {
     UUID id;
     String name;
     String cpf;
-    String workPeriod;
 }

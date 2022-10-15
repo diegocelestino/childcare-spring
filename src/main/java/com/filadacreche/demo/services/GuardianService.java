@@ -8,8 +8,10 @@ import com.filadacreche.demo.exceptions.ResourceNotFoundException;
 import com.filadacreche.demo.models.Guardian;
 import com.filadacreche.demo.repositories.GuardianRepository;
 import lombok.AllArgsConstructor;
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,9 +26,8 @@ public class GuardianService {
         Guardian guardian = new Guardian(
                 guardianCreateDto.getName(),
                 guardianCreateDto.getCpf(),
-                Period.valueOf(guardianCreateDto.getWorkPeriod())
+                childService.getChild(guardianCreateDto.getChildId())
         );
-        childService.appendGuardian(guardian, guardianCreateDto.getChildId());
         return guardianRepository.save(guardian);
     }
 
@@ -34,7 +35,6 @@ public class GuardianService {
         Guardian guardian = getGuardian(guardianDtoIn.getId());
         guardian.setName(guardianDtoIn.getName());
         guardian.setCpf(guardianDtoIn.getCpf());
-        guardian.setWorkPeriod(guardian.getWorkPeriod());
         return guardianRepository.save(guardian);
     }
 
@@ -43,8 +43,8 @@ public class GuardianService {
     }
 
     public void delete(UUID guardianId) {
-        guardianRepository.delete(getGuardian(guardianId));
-        }
+        guardianRepository.deleteById(guardianId);
+    }
 
     public Guardian getGuardian(UUID guardianId) {
         return guardianRepository.findById(guardianId)

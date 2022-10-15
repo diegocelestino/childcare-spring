@@ -25,17 +25,16 @@ public class Guardian {
     @Column(nullable = false)
     private String cpf;
 
-    @Column(nullable = false)
-    private Period workPeriod;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "child_id", nullable = false)
+    private Child child;
 
-    @ManyToMany(mappedBy = "guardians")
-    private List<Child> children;
-
-    public Guardian(String name, String cpf, Period workPeriod) {
+    public Guardian(String name, String cpf, Child child) {
         this.id = UUID.randomUUID();
         this.name = name;
         this.cpf = cpf;
-        this.workPeriod = workPeriod;
+        this.child = child;
+
     }
 
 }

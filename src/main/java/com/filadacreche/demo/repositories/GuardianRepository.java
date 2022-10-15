@@ -10,15 +10,16 @@ import java.util.UUID;
 
 public interface GuardianRepository extends JpaRepository<Guardian, UUID> {
 
-    @Query(
-            value = "SELECT DISTINCT " +
-                    "guardians.guardian_id, " +
-                    "guardians.cpf, " +
-                    "guardians.name, " +
-                    "guardians.work_period " +
-                    "FROM guardians " +
-                    "JOIN children_guardians ON children_guardians.child_id = :childId",
-            nativeQuery = true)
+//    @Query(
+//            value = "SELECT DISTINCT " +
+//                    "guardians.guardian_id, " +
+//                    "guardians.cpf, " +
+//                    "guardians.name " +
+//                    "FROM guardians " +
+//                    "JOIN children_guardians ON children_guardians.child_id = :childId",
+//            nativeQuery = true)
     List<Guardian> findByChildId(UUID childId);
+
+
 
 }

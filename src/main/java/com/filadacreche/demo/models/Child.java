@@ -42,22 +42,17 @@ public class Child{
 
     private Boolean census;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "subgroup_id")
     private Subgroup subgroup;
 
-    @OneToMany(mappedBy = "child")
+    @OneToMany(mappedBy = "child", cascade = CascadeType.ALL)
     private List<Observation> observations;
 
     @OneToMany(mappedBy = "child")
     private List<Contact> contacts;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "children_guardians",
-            joinColumns = {@JoinColumn(name = "child_id")},
-            inverseJoinColumns = {@JoinColumn(name = "guardian_id")}
-    )
+    @OneToMany(mappedBy = "child", cascade = CascadeType.ALL)
     private List<Guardian> guardians;
 
     public Child(String name, LocalDate birthDate, String registrationNumber, LocalDate registrationDate) {
