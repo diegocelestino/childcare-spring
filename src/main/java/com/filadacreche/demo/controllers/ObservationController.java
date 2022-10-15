@@ -31,7 +31,7 @@ public class ObservationController {
         List<ObservationDto> observationDtos = observationMapper.to(observations);
         return ResponseEntity.ok(observationDtos);
     }
-t
+
     @PostMapping
     public ResponseEntity<ObservationDto> create(@RequestBody ObservationCreateDto observationCreateDto){
         Observation observation = observationService.save(observationCreateDto);

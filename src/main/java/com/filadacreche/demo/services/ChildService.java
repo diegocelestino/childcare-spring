@@ -74,7 +74,6 @@ public class ChildService {
         child.setRegistrationNumber(childDtoIn.getRegistrationNumber());
         child.setRegistrationDate(childDtoIn.getRegistrationDate());
         child.setMovimentMap(MovimentMap.valueOf(childDtoIn.getMovimentMap()));
-        child.setFoodRestriction(childDtoIn.getFoodRestriction());
         child.setUniformDispatch(childDtoIn.getUniformDispatch());
         child.setUniformDelivered(childDtoIn.getUniformDelivered());
         child.setCensus(childDtoIn.getCensus());
@@ -89,7 +88,5 @@ public class ChildService {
     public Page<Child> getChildren(Pageable pageable) {
         return childRepository.findAll(pageable);
     }
-
-
 
 }

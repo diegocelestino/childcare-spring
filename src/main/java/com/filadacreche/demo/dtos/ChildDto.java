@@ -15,7 +15,6 @@ public class ChildDto {
     String registrationNumber;
     LocalDate registrationDate;
     String movimentMap;
-    String foodRestriction;
     String uniformDispatch;
     Boolean uniformDelivered;
     Boolean census;

@@ -36,8 +36,6 @@ public class Child{
     @Enumerated(EnumType.STRING)
     private MovimentMap movimentMap;
 
-    private String foodRestriction;
-
     private String uniformDispatch;
 
     private Boolean uniformDelivered;
@@ -69,7 +67,6 @@ public class Child{
         this.registrationNumber = registrationNumber.replaceAll("[^0-9]" , "");
         this.registrationDate = registrationDate;
         this.movimentMap = MovimentMap.NONE;
-        this.foodRestriction = "";
         this.uniformDispatch = "";
         this.uniformDelivered = false;
         this.census = false;
