@@ -1,15 +1,14 @@
 package com.filadacreche.demo.services;
 
 import com.filadacreche.demo.dtos.ObservationCreateDto;
-import com.filadacreche.demo.dtos.RoomCreateDto;
-import com.filadacreche.demo.enums.Degree;
-import com.filadacreche.demo.enums.DisabilityType;
 import com.filadacreche.demo.enums.ObservationType;
 import com.filadacreche.demo.models.*;
 import com.filadacreche.demo.repositories.ObservationRepository;
-import com.filadacreche.demo.repositories.RoomRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -28,4 +27,7 @@ public class ObservationService {
         return observationRepository.save(observation);
     }
 
+    public List<Observation> getObservationsByChildId(UUID childId) {
+        return this.observationRepository.findAllByChildId(childId);
+    }
 }

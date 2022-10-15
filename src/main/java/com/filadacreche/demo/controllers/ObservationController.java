@@ -13,6 +13,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.UUID;
+
 @RestController
 @RequestMapping("api/v1/observation")
 @AllArgsConstructor
@@ -22,6 +25,13 @@ public class ObservationController {
     private final ObservationService observationService;
     private final ObservationMapper observationMapper;
 
+    @GetMapping("{childId}")
+    public ResponseEntity<List<ObservationDto>> getObservationsByChildId(@PathVariable UUID childId){
+        List<Observation> observations = observationService.getObservationsByChildId(childId);
+        List<ObservationDto> observationDtos = observationMapper.to(observations);
+        return ResponseEntity.ok(observationDtos);
+    }
+t
     @PostMapping
     public ResponseEntity<ObservationDto> create(@RequestBody ObservationCreateDto observationCreateDto){
         Observation observation = observationService.save(observationCreateDto);
