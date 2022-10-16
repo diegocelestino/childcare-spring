@@ -2,15 +2,11 @@ package com.filadacreche.demo.services;
 
 import com.filadacreche.demo.dtos.ContactCreateDto;
 import com.filadacreche.demo.dtos.ContactDto;
-import com.filadacreche.demo.dtos.TeacherCreateDto;
-import com.filadacreche.demo.dtos.TeacherDto;
 import com.filadacreche.demo.enums.OwnerType;
 import com.filadacreche.demo.exceptions.ResourceName;
 import com.filadacreche.demo.exceptions.ResourceNotFoundException;
 import com.filadacreche.demo.models.Contact;
-import com.filadacreche.demo.models.Teacher;
 import com.filadacreche.demo.repositories.ContactRepository;
-import com.filadacreche.demo.repositories.TeacherRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

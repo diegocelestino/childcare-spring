@@ -24,9 +24,14 @@ public class Teacher {
     @ManyToMany(mappedBy = "teachers")
     private List<Subgroup> subgroup;
 
-    public Teacher(String name, List<Subgroup> subgroup) {
+    public Teacher(String name, List<Subgroup> subgroups) {
         this.id = UUID.randomUUID();
         this.name = name;
-        this.subgroup = subgroup;
+        this.subgroup = subgroups;
     }
+    public Teacher(String name) {
+        this.id = UUID.randomUUID();
+        this.name = name;
+    }
+
 }

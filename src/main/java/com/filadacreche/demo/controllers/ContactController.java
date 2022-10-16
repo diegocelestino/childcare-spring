@@ -2,14 +2,9 @@ package com.filadacreche.demo.controllers;
 
 import com.filadacreche.demo.dtos.ContactCreateDto;
 import com.filadacreche.demo.dtos.ContactDto;
-import com.filadacreche.demo.dtos.TeacherCreateDto;
-import com.filadacreche.demo.dtos.TeacherDto;
 import com.filadacreche.demo.mappers.ContactMapper;
-import com.filadacreche.demo.mappers.TeacherMapper;
 import com.filadacreche.demo.models.Contact;
-import com.filadacreche.demo.models.Teacher;
 import com.filadacreche.demo.services.ContactService;
-import com.filadacreche.demo.services.TeacherService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

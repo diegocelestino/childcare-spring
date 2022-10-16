@@ -1,6 +1,5 @@
 package com.filadacreche.demo.dtos;
 
-import com.filadacreche.demo.enums.OwnerType;
 import lombok.Getter;
 import lombok.Value;
 

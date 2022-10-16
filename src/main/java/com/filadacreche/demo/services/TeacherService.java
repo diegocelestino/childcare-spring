@@ -6,11 +6,13 @@ import com.filadacreche.demo.dtos.TeacherDto;
 import com.filadacreche.demo.exceptions.ResourceName;
 import com.filadacreche.demo.exceptions.ResourceNotFoundException;
 import com.filadacreche.demo.models.Room;
+import com.filadacreche.demo.models.Subgroup;
 import com.filadacreche.demo.models.Teacher;
 import com.filadacreche.demo.repositories.RoomRepository;
 import com.filadacreche.demo.repositories.TeacherRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.UUID;
@@ -24,10 +26,8 @@ public class TeacherService {
     public Teacher save(TeacherCreateDto teacherCreateDto){
 
         Teacher teacher = new Teacher(
-                teacherCreateDto.getName(),
-                List.of(subgroupService.getSubgroup(UUID.fromString(teacherCreateDto.getSubgroupId())))
+                teacherCreateDto.getName()
         );
-        subgroupService.appendTeacher(teacher, UUID.fromString(teacherCreateDto.getSubgroupId()));
         return teacherRepository.save(teacher);
     }
 
@@ -44,5 +44,14 @@ public class TeacherService {
         Teacher teacher = getTeacher(teacherUpdateDto.getId());
         teacher.setName(teacherUpdateDto.getName());
         return teacherRepository.save(teacher);
+    }
+
+    public List<Teacher> getTeachers() {
+        return this.teacherRepository.findAll();
+    }
+
+    public List<Teacher> getTeachersBySubgroupId(UUID subgroupId) {
+        Subgroup subgroup = subgroupService.getSubgroup(subgroupId);
+        return teacherRepository.findAllBySubgroup(subgroup);
     }
 }
