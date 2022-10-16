@@ -3,6 +3,7 @@ package com.filadacreche.demo.controllers;
 import com.filadacreche.demo.dtos.*;
 import com.filadacreche.demo.mappers.SubgroupMapper;
 import com.filadacreche.demo.models.Subgroup;
+import com.filadacreche.demo.services.RegisterService;
 import com.filadacreche.demo.services.SubgroupService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ public class SubgroupController {
 
     private final SubgroupService subgroupService;
     private final SubgroupMapper subgroupMapper;
+    private final RegisterService registerService;
 
 
     @GetMapping("{subgroupId}")
@@ -44,14 +46,14 @@ public class SubgroupController {
 
     @PostMapping("registerTeacher")
     public ResponseEntity<SubgroupDto> appendTeacher(@RequestBody RegisterTeacherOnSubgroupDto dto){
-        Subgroup subgroup = subgroupService.appendTeacher(dto);
+        Subgroup subgroup = registerService.registerTeacherOnSubgroup(dto);
         SubgroupDto subgroupDto = subgroupMapper.to(subgroup);
         return ResponseEntity.ok(subgroupDto);
     }
 
     @PostMapping("unregisterTeacher")
     public ResponseEntity<SubgroupDto> removeTeacher(@RequestBody RegisterTeacherOnSubgroupDto dto){
-        Subgroup subgroup = subgroupService.removeTeacher(dto);
+        Subgroup subgroup = registerService.unregisterTeacherOnSubgroup(dto);
         SubgroupDto subgroupDto = subgroupMapper.to(subgroup);
         return ResponseEntity.ok(subgroupDto);
     }
