@@ -31,13 +31,27 @@ public class SubgroupController {
     @GetMapping()
     public ResponseEntity<List<SubgroupDto>> getSubgroupsByRoom(@RequestParam UUID roomId){
         List<Subgroup> subgroups = subgroupService.getSubgroupsByRoom(roomId);
-        List<SubgroupDto> subgroupDtos = subgroupMapper.to(subgroups);
-        return ResponseEntity.ok(subgroupDtos);
+        List<SubgroupDto> subgroupsDto = subgroupMapper.to(subgroups);
+        return ResponseEntity.ok(subgroupsDto);
     }
 
     @PostMapping
     public ResponseEntity<SubgroupDto> create(@RequestBody SubgroupCreateDto subgroupCreateDto){
         Subgroup subgroup = subgroupService.save(subgroupCreateDto);
+        SubgroupDto subgroupDto = subgroupMapper.to(subgroup);
+        return ResponseEntity.ok(subgroupDto);
+    }
+
+    @PostMapping("registerTeacher")
+    public ResponseEntity<SubgroupDto> appendTeacher(@RequestBody RegisterTeacherOnSubgroupDto dto){
+        Subgroup subgroup = subgroupService.appendTeacher(dto);
+        SubgroupDto subgroupDto = subgroupMapper.to(subgroup);
+        return ResponseEntity.ok(subgroupDto);
+    }
+
+    @PostMapping("unregisterTeacher")
+    public ResponseEntity<SubgroupDto> removeTeacher(@RequestBody RegisterTeacherOnSubgroupDto dto){
+        Subgroup subgroup = subgroupService.removeTeacher(dto);
         SubgroupDto subgroupDto = subgroupMapper.to(subgroup);
         return ResponseEntity.ok(subgroupDto);
     }

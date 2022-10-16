@@ -6,8 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Value
-public class TeacherDto {
+public class TeacherBasicDto {
     UUID id;
     String name;
-    List<SubgroupBasicDto> subgroups;
 }

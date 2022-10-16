@@ -11,5 +11,5 @@ import java.util.UUID;
 
 public interface TeacherRepository extends JpaRepository<Teacher, UUID> {
 
-    List<Teacher> findAllBySubgroup(Subgroup subgroupId);
+    List<Teacher> findAllBySubgroups(Subgroup subgroup);
 }

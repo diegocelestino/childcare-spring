@@ -10,7 +10,7 @@ public class SubgroupDto {
     String cycle;
     String period;
     Integer capacity;
-    List<TeacherDto> teachers;
+    List<TeacherBasicDto> teachers;
     List<ChildDto> children;
     RoomBasicDto room;
 }

@@ -1,5 +1,6 @@
 package com.filadacreche.demo.services;
 
+import com.filadacreche.demo.dtos.RegisterTeacherOnSubgroupDto;
 import com.filadacreche.demo.dtos.SubgroupCreateDto;
 import com.filadacreche.demo.dtos.SubgroupUpdateDto;
 import com.filadacreche.demo.enums.Cycle;
@@ -7,7 +8,6 @@ import com.filadacreche.demo.enums.Period;
 import com.filadacreche.demo.exceptions.ResourceName;
 import com.filadacreche.demo.exceptions.ResourceNotFoundException;
 import com.filadacreche.demo.models.Subgroup;
-import com.filadacreche.demo.models.Teacher;
 import com.filadacreche.demo.repositories.SubgroupRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +20,7 @@ import java.util.UUID;
 public class SubgroupService {
     private final SubgroupRepository subgroupRepository;
     private final RoomService roomService;
+    private final RegisterService registerService;
 
     public Subgroup save(SubgroupCreateDto subgroupCreateDto){
         Subgroup subgroup = new Subgroup(
@@ -39,14 +40,6 @@ public class SubgroupService {
         return subgroupRepository.save(subgroup);
     }
 
-    public void appendTeacher(Teacher teacher, UUID subgroupId){
-        Subgroup subgroup = getSubgroup(subgroupId);
-        List<Teacher> teachers = subgroup.getTeachers();
-        teachers.add(teacher);
-        subgroup.setTeachers(teachers);
-        subgroupRepository.save(subgroup);
-    }
-
     public List<Subgroup> getSubgroupsByRoom(UUID roomId) {
         return subgroupRepository.findAllByRoomId(roomId);
     }
@@ -60,5 +53,11 @@ public class SubgroupService {
         subgroupRepository.delete(getSubgroup(subgroupId));
     }
 
+    public Subgroup appendTeacher(RegisterTeacherOnSubgroupDto dto){
+        return registerService.registerTeacherOnSubgroup(dto);
+    }
 
+    public Subgroup removeTeacher(RegisterTeacherOnSubgroupDto dto) {
+        return registerService.unregisterTeacherOnSubgroup(dto);
+    }
 }

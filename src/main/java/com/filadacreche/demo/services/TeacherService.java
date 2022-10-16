@@ -52,6 +52,6 @@ public class TeacherService {
 
     public List<Teacher> getTeachersBySubgroupId(UUID subgroupId) {
         Subgroup subgroup = subgroupService.getSubgroup(subgroupId);
-        return teacherRepository.findAllBySubgroup(subgroup);
+        return teacherRepository.findAllBySubgroups(subgroup);
     }
 }
